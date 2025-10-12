@@ -2,51 +2,44 @@
 using namespace std;
 #include<bits/stdc++.h>
 
-class TreeNode{
-    public:
+
+
+class TreeNode {
+public:
     TreeNode *left;
     int val;
-    TreeNode* right;
-    TreeNode(int val){
-        this->val=val;
-        left=right=NULL;
+    TreeNode *right;
+    TreeNode(int val) {
+        this->val = val;
+        left = right = NULL;
     }
 };
-void create(){
-    TreeNode *p,*t;
+
+TreeNode* create() {
     int x;
-    cin>>x;
-    queue<TreeNode*>q;
-    TreeNode *root;
-    if(x==-1){
-        root=NULL;
-        return;
-    }
-    if(!root){
-    t= new TreeNode(x);
-    root=t;
-    root->left=root->right=NULL;
-    q.push(t);
-    }
-    while(!q.empty()){
-        p=q.front();
+    cin >> x;
+    if (x == -1) return NULL; // no tree
+
+    TreeNode *root = new TreeNode(x);
+    queue<TreeNode*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        TreeNode *p = q.front();
         q.pop();
-        if(x!=-1){
-            t=new TreeNode(x);
-            p->left=t;
-            q.push(t);
-            t->left=t->right=NULL;
 
+        // Left child
+        cin >> x;
+        if (x != -1) {
+            p->left = new TreeNode(x);
+            q.push(p->left);
         }
-        if(x!=-1){
-            t=new TreeNode(x);
-            p->right=t;
-            q.push(t);
-            t->left=t->right=NULL;
-
+        // Right child
+        cin >> x;
+        if (x != -1) {
+            p->right = new TreeNode(x);
+            q.push(p->right);
         }
     }
-
-
-
+    return root;
 }
